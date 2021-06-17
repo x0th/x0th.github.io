@@ -1,3 +1,9 @@
+---
+layout: page
+title: GitHub
+permalink: /github/
+---
+
 # GitHub page: [x0th](https://github.com/x0th)
 
 [Local PGP](https://github.com/x0th/Local-PGP)
