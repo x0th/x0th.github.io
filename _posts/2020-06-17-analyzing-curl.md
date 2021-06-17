@@ -1,3 +1,9 @@
+---
+layout: post
+title: Analyzing curl with IKOS, KLEE and CBMC
+categories: Program analysis
+---
+
 This is a report for a project that I did for CSC 255 Software Analysis & Improvement while in University of Rochester. Thanks to Professors Sreepathi Pai's permission and encourangement, I am able to post it. The report was edited minorly to translate it to the Markdown language.
 The project involved finding and analyzing bug(s) in the curl library using analysis tools such as IKOS, KLEE and CBMC. The code for the project is available [here](https://github.com/x0th/analyzing-curl).
 
