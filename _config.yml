@@ -9,7 +9,7 @@ name: x0th
 author: x0th
 
 # Short bio or description (displayed in the header)
-description: x0th
+description: Everything security and programming languages
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars.githubusercontent.com/u/51054518?s=60&v=4
@@ -89,7 +89,7 @@ plugins:
 
 include: ['_pages']
 
-paginate: 5
+paginate: 6
 paginate_path: /page:num/
 
 # Exclude these files from your production _site
