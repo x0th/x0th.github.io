@@ -27,7 +27,7 @@ Most people know standard sudoku rules. Anyways, here they are in a set notation
 
 First, we must define what a sudoku grid is:
 
-**Grid** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}
+<code style="background-color:#282A36"><b>Grid</b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}</code>
 
 As expected, a sudoku grid is just a set of positions, denoted x<sub>ij</sub>, with a cardinality of 81.
 
