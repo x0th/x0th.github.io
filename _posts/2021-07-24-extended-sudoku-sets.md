@@ -7,15 +7,13 @@ categories: Sudoku
 <style>
 	code {
 		background-color:#282A36;
-		padding: 15px;
+		padding: 10px;
 	}
 	sub {
 		vertical-align: sub;
 		font-size: medium;
 	}
 </style>
-
-## What is sudoku with extended rules?
 
 Sudoku with extended rules is just what it sounds like - it's a sudoku puzzle that has some rules added to it, making it more interesting. This allows for crazy and, at first glance, unsolvable puzzles, like [this one](https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=00071Y): ![alt text](/images/sudoku_rules/empty_grid.png "This sudoku has a unique solution!")
 
@@ -44,19 +42,19 @@ As expected, a sudoku grid is just a set of positions, denoted x<sub>ij</sub>, w
 
 Next, all the positions contain digits from 1 to 9:
 
-<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, 1 &le; *val*(x<sub>ij</sub>) &le; 9</code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, 1 &le; <i>val</i>(x<sub>ij</sub>) &le; 9</code>
 
-Here, *val*(square) functions returns the value of a square.
+Here, <i>val</i>(square) functions returns the value of a square.
 
 There are also some restrictions on the grid. For one, you cannot repeat the same digits in a row or a column:
 
-<code>&forall;x<sub>ij</sub> &isin; **Grid**, j &ne; k &rarr; *val*(x<sub>ij</sub>) &ne; *val*(x<sub>ik</sub>)</code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, j &ne; k &rarr; <i>val</i>(x<sub>ij</sub>) &ne; <i>val</i>(x<sub>ik</sub>)</code>
 
-<code>&forall;x<sub>ij</sub> &isin; **Grid**, j &ne; k &rarr; *val*(x<sub>ji</sub>) &ne; *val*(x<sub>ki</sub>)</code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, j &ne; k &rarr; <i>val</i>(x<sub>ji</sub>) &ne; <i>val</i>(x<sub>ki</sub>)</code>
 
 You also cannot repeat digits in a sudoku "box":
 
-<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; **Grid**, (i &ne; m &or; j &ne; n) &and; &LeftFloor;i/3&RightFloor; = &LeftFloor;m/3&RightFloor; &and; &LeftFloor;j/3&RightFloor; = &LeftFloor;n/3&RightFloor; &rarr; *val*(x<sub>ij</sub>) &ne; *val*(x<sub>mn</sub>)</code>
+<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; <b>Grid</b>, (i &ne; m &or; j &ne; n) &and; &LeftFloor;i/3&RightFloor; = &LeftFloor;m/3&RightFloor; &and; &LeftFloor;j/3&RightFloor; = &LeftFloor;n/3&RightFloor; &rarr; <i>val</i>(x<sub>ij</sub>) &ne; <i>val</i>(x<sub>mn</sub>)</code>
 
 ## Odd, even
 
@@ -68,9 +66,9 @@ Gray circle means that the digit in it is odd. Gray square means that the digit 
 
 The definitions are pretty easy:
 
-<code>*val*(**Odd<sub>k</sub>**) mod 2 = 1</code>
+<code><i>val</i>(<b>Odd<sub>k</sub></b>) mod 2 = 1</code>
 
-<code>*val*(**Even<sub>k</sub>**) mod 2 = 0</code>
+<code><i>val</i>(<b>Even<sub>k</sub></b>) mod 2 = 0</code>
 
 ## Killer Cage
 
@@ -80,17 +78,17 @@ Killer Cages sound spooky, but in reality they are quite easy. They allow defini
 
 And here's how they are defined:
 
-<code>**Cage<sub>k</sub>** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
+<code><b>Cage<sub>k</sub></b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
 
 First, digits cannot repeat within a Cage:
 
-<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; **Cage<sub>k</sub>**, (i &ne; m &or; j &ne; n) &rarr; *val*(x<sub>ij</sub>) &ne; *val*(x<sub>mn</sub>)</code>
+<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; <b>Cage<sub>k</sub></b>, (i &ne; m &or; j &ne; n) &rarr; <i>val</i>(x<sub>ij</sub>) &ne; <i>val</i>(x<sub>mn</sub>)</code>
 
 Also, some cages have their sums shown in the top left corner:
 
-<code>(*sum*(**Cage<sub>k</sub>**) = {i &isin; &#8469;}) &or; (*sum*(**Cage<sub>k</sub>**) = "?")</code>
+<code>(<i>sum</i>(<b>Cage<sub>k</sub></b>) = {i &isin; &#8469;}) &or; (<i>sum</i>(<b>Cage<sub>k</sub></b>) = "?")</code>
 
-The *sum*() functions returns the sum of all the elements in a set. I use "?" to signify that the sum is not known.
+The <i>sum</i>() functions returns the sum of all the elements in a set. I use "?" to signify that the sum is not known.
 
 ## Thermo
 
@@ -100,9 +98,9 @@ Thermometers are an interesting concept for sure. Digits along the thermometers 
 
 And that's how they are defined:
 
-<code>**Thermo<sub>k</sub>** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
+<code><b>Thermo<sub>k</sub></b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
 
-<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; **Thermo<sub>k</sub>**, x<sub>ij</sub> &pr; x<sub>mn</sub> &rarr; *val*(x<sub>ij</sub>) &lt; *val*(x<sub>mn</sub>)</code>
+<code>&forall;x<sub>ij</sub>,x<sub>mn</sub> &isin; <b>Thermo<sub>k</sub></b>, x<sub>ij</sub> &pr; x<sub>mn</sub> &rarr; <i>val</i>(x<sub>ij</sub>) &lt; <i>val</i>(x<sub>mn</sub>)</code>
 
 I cheat a little here: I define an ordering of the set, where the set is ordered from the bulb up.
 
@@ -112,9 +110,9 @@ Arrows is another rule that is hard to define with just sets. The rule is simple
 
 ![alt text](/images/sudoku_rules/arrow.png "Arrow")
 
-<code>**Arrow<sub>k</sub>** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
+<code><b>Arrow<sub>k</sub></b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
 
-<code>*val*(&top;) = *sum*(**Arrow<sub>k</sub>** - &top;)</code>
+<code><i>val</i>(&top;) = <i>sum</i>(<b>Arrow<sub>k</sub></b> - &top;)</code>
 
 I cheat a little here again - I define the bulb of the arrow as the top element of the set.
 
@@ -126,17 +124,17 @@ White Kropki, where the difference between two squares is one:
 
 ![alt text](/images/sudoku_rules/wkropki.png "White Kropki dots")
 
-<code>**WKropki<sub>k</sub>** =&#12296;one, two&#12297;</code>
+<code><b>WKropki<sub>k</sub></b> =&#12296;one, two&#12297;</code>
 
-<code>&vert;**WKropki<sub>k</sub>**.one - **WKropki<sub>k</sub>**.two&vert; = 1</code>
+<code>&vert;<b>WKropki<sub>k</sub></b>.one - <b>WKropki<sub>k</sub></b>.two&vert; = 1</code>
 
 And Black Kropki, where one of the squares is twice the other:
 
 ![alt text](/images/sudoku_rules/bkropki.png "Black Kropki dots")
 
-<code>**BKropki<sub>k</sub>** =&#12296;one, two&#12297;</code>
+<code><b>BKropki<sub>k</sub></b> =&#12296;one, two&#12297;</code>
 
-<code>(**BKropki<sub>k</sub>**.one &gt; **BKropki<sub>k</sub>**.two) &and; (**BKropki<sub>k</sub>**.one = 2(**BKropki<sub>k</sub>**.two))) &or; ((**BKropki<sub>k</sub>**.one &lt; **BKropki<sub>k</sub>**.two) &and; (2(**BKropki<sub>k</sub>**.one) = **BKropki<sub>k</sub>**.two)</code>
+<code>(<b>BKropki<sub>k</sub></b>.one &gt; <b>BKropki<sub>k</sub></b>.two) &and; (<b>BKropki<sub>k</sub></b>.one = 2(<b>BKropki<sub>k</sub></b>.two))) &or; ((<b>BKropki<sub>k</sub></b>.one &lt; <b>BKropki<sub>k</sub></b>.two) &and; (2(<b>BKropki<sub>k</sub></b>.one) = <b>BKropki<sub>k</sub></b>.two)</code>
 
 I define the Kropki rules using tuples to shorten the notation.
 
@@ -148,17 +146,17 @@ V signifies that two squares add up to 5:
 
 ![alt text](/images/sudoku_rules/v.png "V")
 
-<code>**V<sub>k</sub>** =&#12296;one, two&#12297;</code>
+<code><b>V<sub>k</sub></b> =&#12296;one, two&#12297;</code>
 
-<code>**V<sub>k</sub>**.one + **V<sub>k</sub>**.two = 5</code>
+<code><b>V<sub>k</sub></b>.one + <b>V<sub>k</sub></b>.two = 5</code>
 
 X signifies that two squares add up to 10:
 
 ![alt text](/images/sudoku_rules/x.png "X")
 
-<code>**X<sub>k</sub>** =&#12296;one, two&#12297;</code>
+<code><b>X<sub>k</sub></b> =&#12296;one, two&#12297;</code>
 
-<code>**X<sub>k</sub>**.one + **X<sub>k</sub>**.two = 10</code>
+<code><b>X<sub>k</sub></b>.one + <b>X<sub>k</sub></b>.two = 10</code>
 
 ## Renban lines
 
@@ -166,9 +164,9 @@ Renban lines are simple rules that are incredibly hard to define. The rule is th
 
 ![alt text](/images/sudoku_rules/renban.png "Renban")
 
-<code>**Renban<sub>k</sub>** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
+<code><b>Renban<sub>k</sub></b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
 
-<code>&forall;x<sub>ij</sub> &isin; **Renban<sub>k</sub>**, *val*(&top;) - &vert;**Renban<sub>k</sub>**&vert; &lt; *val*(x<sub>ij</sub>) &leq; *val*(&top;)</code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Renban<sub>k</sub></b>, <i>val</i>(&top;) - &vert;<b>Renban<sub>k</sub></b>&vert; &lt; <i>val</i>(x<sub>ij</sub>) &leq; <i>val</i>(&top;)</code>
 
 I have to specify here that the set is ordered by ascending value. The rule above says that all the digits on the Renban line are between top (including) and top minus the line length.
 
@@ -178,9 +176,9 @@ Palindrome rules are exacly what they sound like - squares opposite on the line 
 
 ![alt text](/images/sudoku_rules/palindrome.png "Palindrome, squares of the same color contain the same digits")
 
-<code>**Palindrome<sub>k</sub>** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
+<code><b>Palindrome<sub>k</sub></b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9}</code>
 
-<code>&forall;x<sub>ij</sub> &isin; **Palindrome<sub>k</sub>**, *val*(x<sub>ij</sub>) = *val*(&perp; + (&top; - x<sub>ij</sub>))</code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Palindrome<sub>k</sub></b>, <i>val</i>(x<sub>ij</sub>) = <i>val</i>(&perp; + (&top; - x<sub>ij</sub>))</code>
 
 The arithmetic on &top; and &perp; calculates the "offset" of the set element.
 
@@ -190,7 +188,7 @@ Bishop rules are first of the Chess Sudoku rules. The digits along a bishop move
 
 ![alt text](/images/sudoku_rules/bishop.png "Bishop rules, highlited squares cannot be 2")
 
-<code>&forall;x<sub>ij</sub> &isin; **Grid**, 1 &le; n &le; 9, x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)(j&plusmn;n)</sub></code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, 1 &le; n &le; 9, x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)(j&plusmn;n)</sub></code>
 
 A short note on notation: i use x &plusmn; y as a shorthand for (x + y) &and; (x - y). Also, it is assumed that if the offset is out of the grid, the case is not considered.
 
@@ -200,7 +198,7 @@ King rules are analogous to other chess sudoku rules. The digits along a king mo
 
 ![alt text](/images/sudoku_rules/king.png "King rules, highlited squares cannot be 2")
 
-<code>&forall;x<sub>ij</sub> &isin; **Grid**, x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)(j&plusmn;1)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)j</sub> &and; x<sub>ij</sub> &ne; x<sub>i(j&plusmn;1)</sub></code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)(j&plusmn;1)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)j</sub> &and; x<sub>ij</sub> &ne; x<sub>i(j&plusmn;1)</sub></code>
 
 ## Queen
 
@@ -208,7 +206,7 @@ Just as in chess, queen rules are like an extention of king rules with bigger of
 
 ![alt text](/images/sudoku_rules/queen.png "Queen rules, highlited squares cannot be 2")
 
-<code">&forall;x<sub>ij</sub> &isin; **Grid**, 1 &le; n &le; 9, x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)(j&plusmn;n)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)j</sub> &and; x<sub>ij</sub> &ne; x<sub>i(j&plusmn;n)</sub></code>
+<code">&forall;x<sub>ij</sub> &isin; <b>Grid</b>, 1 &le; n &le; 9, x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)(j&plusmn;n)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;n)j</sub> &and; x<sub>ij</sub> &ne; x<sub>i(j&plusmn;n)</sub></code>
 
 ## Knight
 
@@ -216,7 +214,7 @@ Again, knight sudoku rules are equivalent to their chess counterparts. Digits kn
 
 ![alt text](/images/sudoku_rules/knight.png "Knight rules, highlited squares cannot be 2")
 
-<code>&forall;x<sub>ij</sub> &isin; **Grid**, x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)(j&plusmn;2)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;2)(j&plusmn;1)</sub></code>
+<code>&forall;x<sub>ij</sub> &isin; <b>Grid</b>, x<sub>ij</sub> &ne; x<sub>(i&plusmn;1)(j&plusmn;2)</sub> &and; x<sub>ij</sub> &ne; x<sub>(i&plusmn;2)(j&plusmn;1)</sub></code>
 
 ## Sandwich
 
@@ -224,13 +222,13 @@ The sandwich rule is a fun one. It says that in an indicated row/column, the num
 
 ![alt text](/images/sudoku_rules/sandwich.png "Sandwich rules")
 
-<code>**SandRow<sub>i</sub>** &isin; &#8469;</code>
+<code><b>SandRow<sub>i</sub></b> &isin; &#8469;</code>
 
-<code>*val*(x<sub>ij</sub>) = 1 &and; *val*(x<sub>ik</sub>) = 9, **SandRow<sub>i</sub>** = *sum*({x<sub>iq</sub> &vert; *min*(j, k) &lt; q &lt; *max*(j, k)})</code>
+<code><i>val</i>(x<sub>ij</sub>) = 1 &and; <i>val</i>(x<sub>ik</sub>) = 9, <b>SandRow<sub>i</sub></b> = <i>sum</i>({x<sub>iq</sub> &vert; <i>min</i>(j, k) &lt; q &lt; <i>max</i>(j, k)})</code>
 
-<code>**SandCol<sub>i</sub>** &isin; &#8469;</code>
+<code><b>SandCol<sub>i</sub></b> &isin; &#8469;</code>
 
-<code>*val*(x<sub>ji</sub>) = 1 &and; *val*(x<sub>ki</sub>) = 9, **SandCol<sub>i</sub>** = *sum*({x<sub>qi</sub> &vert; *min*(j, k) &lt; q &lt; *max*(j, k)})</code>
+<code><i>val</i>(x<sub>ji</sub>) = 1 &and; <i>val</i>(x<sub>ki</sub>) = 9, <b>SandCol<sub>i</sub></b> = <i>sum</i>({x<sub>qi</sub> &vert; <i>min</i>(j, k) &lt; q &lt; <i>max</i>(j, k)})</code>
 
 ## Killer Sum
 
@@ -242,17 +240,17 @@ It is a bit hard to define in terms of sets, so here is my definition.
 
 First, a Killer Sum is a 3-tuple that contains the sum itself, the starting square and the end square.
 
-<code>**Killer<sub>k</sub>** =&#12296;sum, x<sub>ij</sub>, x<sub>mn</sub>&#12297;</code>
+<code><b>Killer<sub>k</sub></b> =&#12296;sum, x<sub>ij</sub>, x<sub>mn</sub>&#12297;</code>
 
 Next, there are four possible cases:
 
-<code>(i &lt; m &and; j &lt; n &rarr; *sum*({x<sub>(i+l)(j+l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = **Killer<sub>k</sub>**.sum) &or;</code>
+<code>(i &lt; m &and; j &lt; n &rarr; <i>sum</i>({x<sub>(i+l)(j+l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = <b>Killer<sub>k</sub></b>.sum) &or;</code>
 
-<code>(i &lt; m &and; j &gt; n &rarr; *sum*({x<sub>(i+l)(j-l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = **Killer<sub>k</sub>**.sum) &or;</code>
+<code>(i &lt; m &and; j &gt; n &rarr; <i>sum</i>({x<sub>(i+l)(j-l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = <b>Killer<sub>k</sub></b>.sum) &or;</code>
 
-<code>(i &gt; m &and; j &lt; n &rarr; *sum*({x<sub>(i-l)(j+l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = **Killer<sub>k</sub>**.sum) &or;</code>
+<code>(i &gt; m &and; j &lt; n &rarr; <i>sum</i>({x<sub>(i-l)(j+l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = <b>Killer<sub>k</sub></b>.sum) &or;</code>
 
-<code>(i &gt; m &and; j &gt; n &rarr; *sum*({x<sub>(i-l)(j-l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = **Killer<sub>k</sub>**.sum)</code>
+<code>(i &gt; m &and; j &gt; n &rarr; <i>sum</i>({x<sub>(i-l)(j-l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = <b>Killer<sub>k</sub></b>.sum)</code>
 
 # Foreword
 
