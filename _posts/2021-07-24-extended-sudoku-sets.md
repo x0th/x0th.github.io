@@ -4,11 +4,9 @@ title: Representing extended sudoku rules with sets
 categories: Sudoku
 ---
 
-# 1. Preface
-
 ## What is sudoku with extended rules?
 
-Sudoku with extended rules is just what it sounds like - it's a sudoku puzzle that has some rules added to it, making it more interesting. This allows for crazy and, at first glance, unsolvable puzzles, like [this one](https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=00071Y): ![alt text](empty_grid.png "This sudoku has a unique solution!")
+Sudoku with extended rules is just what it sounds like - it's a sudoku puzzle that has some rules added to it, making it more interesting. This allows for crazy and, at first glance, unsolvable puzzles, like [this one](https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=00071Y): ![alt text](/images/sudoku_rules/empty_grid.png "This sudoku has a unique solution!")
 
 
 ## What is this post about
@@ -21,7 +19,7 @@ Throughout the text, I use sets to define various rules. The names of the sets a
 
 I also use sudokus from [Logic Masters Germany](https://logic-masters.de/), a wonderful portal for all puzzle lovers, and [F-puzzles](https://f-puzzles.com/) to visualize the rules.
 
-# 2. Defining rules
+# Defining rules
 
 ## Standard
 
@@ -29,7 +27,7 @@ Most people know standard sudoku rules. Anyways, here they are in a set notation
 
 First, we must define what a sudoku grid is:
 
-<code>**Grid** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}</code>
+**Grid** = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}
 
 As expected, a sudoku grid is just a set of positions, denoted x<sub>ij</sub>, with a cardinality of 81.
 
@@ -245,7 +243,7 @@ Next, there are four possible cases:
 
 <code>(i &gt; m &and; j &gt; n &rarr; *sum*({x<sub>(i-l)(j-l)</sub> &vert; 0 &le; l &le; &vert;i - m&vert;}) = **Killer<sub>k</sub>**.sum)</code>
 
-# 3. Foreword
+# Foreword
 
 As you can see, extensions to sudoku rules are not hard to implement. There are quite some ways to go from sets to Z3 rules, however. I plan on doing a full Python implementation of the above rules, which I will link to later on.
 
