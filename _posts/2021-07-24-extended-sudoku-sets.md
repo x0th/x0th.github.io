@@ -4,6 +4,13 @@ title: Representing extended sudoku rules with sets
 categories: Sudoku
 ---
 
+<style>
+	sub {
+		vertical-align: sub;
+		font-size: medium;
+	}
+</style>
+
 ## What is sudoku with extended rules?
 
 Sudoku with extended rules is just what it sounds like - it's a sudoku puzzle that has some rules added to it, making it more interesting. This allows for crazy and, at first glance, unsolvable puzzles, like [this one](https://logic-masters.de/Raetselportal/Raetsel/zeigen.php?id=00071Y): ![alt text](/images/sudoku_rules/empty_grid.png "This sudoku has a unique solution!")
@@ -27,7 +34,7 @@ Most people know standard sudoku rules. Anyways, here they are in a set notation
 
 First, we must define what a sudoku grid is:
 
-<div style="background-color:#282A36"><b>Grid</b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}</div>
+<code style="background-color:#282A36"><b>Grid</b> = {x<sub>ij</sub> &vert; 1 &le; i,j &le; 9, &vert;Grid&vert; = 81}</code>
 
 As expected, a sudoku grid is just a set of positions, denoted x<sub>ij</sub>, with a cardinality of 81.
 
